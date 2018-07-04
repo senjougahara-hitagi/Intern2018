@@ -24,7 +24,6 @@ public class MySQLUtils {
 		try {
 			Class.forName(classForName).newInstance();
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
