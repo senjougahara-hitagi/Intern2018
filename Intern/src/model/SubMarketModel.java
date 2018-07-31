@@ -1,70 +1,76 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Arrays;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.google.gson.annotations.SerializedName;
 
-public class SubModel implements Serializable{
+public class SubMarketModel implements Serializable{
 	@SerializedName("MarketName")
 	private String marketName;
 	@SerializedName("High")
-	private double high;
+	private String high;
 	@SerializedName("Low")
-	private double low;
+	private String low;
 	@SerializedName("Volume")
-	private double volume;
+	private String volume;
 	@SerializedName("Last")
-	private double last;
+	private String last;
 	@SerializedName("BaseVolume")
-	private double baseVolume;
+	private String baseVolume;
 	@SerializedName("TimeStamp")
 	private String timeStamp;
 	@SerializedName("Bid")
-	private double bid;
+	private String bid;
 	@SerializedName("Ask")
-	private double ask;
+	private String ask;
 	@SerializedName("OpenBuyOrders")
 	private int openBuyOrders;
 	@SerializedName("OpenSellOrders")
 	private int openSellOrders;
 	@SerializedName("PrevDay")
-	private double prevDay;
+	private String prevDay;
 	@SerializedName("Created")
 	private String created;
+	
+	
 	public String getMarketName() {
 		return marketName;
 	}
 	public void setMarketName(String marketName) {
 		this.marketName = marketName;
 	}
-	public double getHigh() {
+	public String getHigh() {
 		return high;
 	}
-	public void setHigh(float high) {
+	public void setHigh(String high) {
 		this.high = high;
 	}
-	public double getLow() {
+	public String getLow() {
 		return low;
 	}
-	public void setLow(float low) {
+	public void setLow(String low) {
 		this.low = low;
 	}
-	public double getVolume() {
+	public String getVolume() {
 		return volume;
 	}
-	public void setVolume(float volume) {
+	public void setVolume(String volume) {
 		this.volume = volume;
 	}
-	public double getLast() {
+	public String getLast() {
 		return last;
 	}
-	public void setLast(float last) {
+	public void setLast(String last) {
 		this.last = last;
 	}
-	public double getBaseVolume() {
+	public String getBaseVolume() {
 		return baseVolume;
 	}
-	public void setBaseVolume(float baseVolume) {
+	public void setBaseVolume(String baseVolume) {
 		this.baseVolume = baseVolume;
 	}
 	public String getTimeStamp() {
@@ -73,16 +79,16 @@ public class SubModel implements Serializable{
 	public void setTimeStamp(String timeStamp) {
 		this.timeStamp = timeStamp;
 	}
-	public double getBid() {
+	public String getBid() {
 		return bid;
 	}
-	public void setBid(float bid) {
+	public void setBid(String bid) {
 		this.bid = bid;
 	}
-	public double getAsk() {
+	public String getAsk() {
 		return ask;
 	}
-	public void setAsk(float ask) {
+	public void setAsk(String ask) {
 		this.ask = ask;
 	}
 	public int getOpenBuyOrders() {
@@ -97,10 +103,10 @@ public class SubModel implements Serializable{
 	public void setOpenSellOrders(int openSellOrders) {
 		this.openSellOrders = openSellOrders;
 	}
-	public double getPrevDay() {
+	public String getPrevDay() {
 		return prevDay;
 	}
-	public void setPrevDay(float prevDay) {
+	public void setPrevDay(String prevDay) {
 		this.prevDay = prevDay;
 	}
 	public String getCreated() {
@@ -110,4 +116,16 @@ public class SubModel implements Serializable{
 		this.created = created;
 	}
 	
+	public JSONObject getObject() {
+		JSONObject obj = new JSONObject();
+		try {
+			obj.put("N", getMarketName());
+			obj.put("V", getVolume());
+			obj.put("L", getLast());
+			obj.put("P", getPrevDay());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return obj;
+	}
 }

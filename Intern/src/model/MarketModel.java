@@ -3,6 +3,8 @@ package model;
 import java.io.Serializable;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import com.google.gson.annotations.SerializedName;
 
 public class MarketModel implements Serializable{
@@ -11,7 +13,7 @@ public class MarketModel implements Serializable{
 	@SerializedName("message")
 	private String message;
 	@SerializedName("result")
-	private List<SubModel> result;
+	private List<SubMarketModel> result;
 	
 	public boolean isSuccess() {
 		return success;
@@ -25,14 +27,10 @@ public class MarketModel implements Serializable{
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public List<SubModel> getResult() {
+	public List<SubMarketModel> getResult() {
 		return result;
 	}
-	public void setResult(List<SubModel> result) {
+	public void setResult(List<SubMarketModel> result) {
 		this.result = result;
-	}
-	
-	public void getSubject() {
-		result.forEach(e -> System.out.println(e.getMarketName() + " " + e.getVolume() + " " + e.getLast()));
 	}
 }
