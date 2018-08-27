@@ -1,29 +1,33 @@
-import service.BittrexService;
-import service.ServiceGenerator;
+package controller;
 
+import java.text.DecimalFormat;
+
+import helper.MarketList;
 import model.ResponseResult;
 import model.MarketModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import service.BittrexService;
+import service.ServiceGenerator;
 
-public class Test {
-	private static BittrexService mService;
+public class MarketDataThread implements Runnable {
 	
-	public static void main(String[] args) {
+	private BittrexService mService;
 
+	@Override
+	public void run() {
 		mService = ServiceGenerator.createService(BittrexService.class);
 		mService.getMarketSummaries().enqueue(new Callback<ResponseResult> () {
 
 			@Override
 			public void onResponse(Call<ResponseResult> call, Response<ResponseResult> response) {
 				if(response.isSuccessful()) {
-                    ResponseResult result = response.body();
-                    System.out.println(result.getResult().get(0).getMarketName());
-                    System.out.println(result.getResult().get(0).getLast());
-                    System.out.println(result.getResult().get(0).getPrevDay());
-                } else {
-                    System.out.println(response.errorBody());
+                    MarketList.setMarketList(response.body().getResult());   
+					for (MarketModel el : MarketList.getMarketList()) {
+						el.setVolume(new DecimalFormat("0.000")
+			                    .format(Double.parseDouble(el.getVolume())));
+					}
                 }
 			}
 
@@ -33,6 +37,6 @@ public class Test {
 			}
 
 		});
-
 	}
+
 }
